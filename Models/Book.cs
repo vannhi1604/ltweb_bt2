@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace ltweb_bt2.Models
 {
@@ -22,7 +24,7 @@ namespace ltweb_bt2.Models
                 {
                     Id = 1,
                     Title = "To Kill a Mockingbird",
-                    AuthorId = 201,
+                    AuthorId = 1,
                     GenreId = 1,
                     Image = "/images/products/b1.jpg",
                     Price = 15,
@@ -33,7 +35,7 @@ namespace ltweb_bt2.Models
                 {
                     Id = 2,
                     Title = "1984",
-                    AuthorId = 202,
+                    AuthorId = 2,
                     GenreId = 2,
                     Image = "/images/products/b2.jpg",
                     Price = 10,
@@ -44,7 +46,7 @@ namespace ltweb_bt2.Models
                 {
                     Id = 3,
                     Title = "Pride and Prejudice",
-                    AuthorId = 203,
+                    AuthorId = 3,
                     GenreId = 3,
                     Image = "/images/products/b3.jpg",
                     Price = 12,
@@ -55,7 +57,7 @@ namespace ltweb_bt2.Models
                 {
                     Id = 4,
                     Title = "The Great Gatsby",
-                    AuthorId = 204,
+                    AuthorId = 4,
                     GenreId = 4,
                     Image = "/images/products/b4.jpg",
                     Price = 10,
@@ -65,5 +67,25 @@ namespace ltweb_bt2.Models
             };
             return books;
         }
+        public Book GetBookById(int id)
+        {
+            Book book = this.GetBookList().FirstOrDefault(b => b.Id == id);
+            return book;
+        }
+        public List<SelectListItem> Authors { get; } = new List<SelectListItem>
+        {
+            new SelectListItem {Value = "1", Text = "Harper Lee"},
+            new SelectListItem {Value = "2", Text = "George Orwell"},
+            new SelectListItem {Value = "3", Text = "Jane Austen"},
+            new SelectListItem {Value = "4", Text = "F. Scott Fitzgerald"}
+        };
+        public List<SelectListItem> Genres { get; } = new List<SelectListItem>
+        {
+            new SelectListItem {Value = "1", Text = "Southern Gothic"},
+            new SelectListItem {Value = "2", Text = "Dystopian political fiction"},
+            new SelectListItem {Value = "3", Text = "Romance"},
+            new SelectListItem {Value = "4", Text = "Tragedy"}
+        };
+
     }
 }
